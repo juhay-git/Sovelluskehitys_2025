@@ -8,11 +8,11 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Painike 1" HorizontalAlignment="Left" Margin="34,64,0,0" VerticalAlignment="Top" Height="40" Width="108" Click="Button_Click"/>
-        <Button Content="Kopioi" HorizontalAlignment="Left" Margin="34,125,0,0" VerticalAlignment="Top" Height="40" Width="109" Click="Button_Click_1"/>
+        <Button Content="Hae tiedot" HorizontalAlignment="Left" Margin="34,125,0,0" VerticalAlignment="Top" Height="40" Width="109" Click="Button_Click_1"/>
         <TextBox x:Name="tekstikentta_1" HorizontalAlignment="Left" Margin="203,64,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="136" Height="40"/>
         <TextBox x:Name="tekstikentta_2" HorizontalAlignment="Left" Margin="203,125,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="136" Height="40"/>
         <ComboBox HorizontalAlignment="Left" Margin="645,73,0,0" VerticalAlignment="Top" Width="120"/>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="98,203,72,52"/>
+        <DataGrid x:Name="tuotelista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="98,203,72,52"/>
 
     </Grid>
 </Window>
