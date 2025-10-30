@@ -23,6 +23,25 @@ namespace Sovelluskehitys_2025
         public MainWindow()
         {
             InitializeComponent();
+            Paivita_DataGrid(this, null);
+        }
+
+        private void Paivita_DataGrid(object sender, RoutedEventArgs e)
+        {
+            SqlConnection yhteys = new SqlConnection(polku);
+            yhteys.Open();
+
+            string kysely = "SELECT * FROM tuotteet";
+            SqlCommand komento = yhteys.CreateCommand();
+            komento.CommandText = kysely;
+
+            SqlDataAdapter adapteri = new SqlDataAdapter(komento);
+            DataTable taulu = new DataTable("tuotteet");
+            adapteri.Fill(taulu);
+
+            tuotelista.ItemsSource = taulu.DefaultView;
+
+            yhteys.Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,25 +54,17 @@ namespace Sovelluskehitys_2025
             komento.ExecuteNonQuery();
 
             yhteys.Close();
+
+            Paivita_DataGrid(sender, e);
+
+            tekstikentta_1.Clear();
+            tekstikentta_2.Clear();
+            tekstikentta_3.Clear();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            SqlConnection yhteys = new SqlConnection(polku);
-            yhteys.Open();
-
-            string kysely = "SELECT * FROM tuotteet";
-            SqlCommand komento = yhteys.CreateCommand();
-            komento.CommandText = kysely;
-
-            SqlDataAdapter adapteri = new SqlDataAdapter(komento);
-            DataTable taulu = new DataTable("tuotteet");
-            adapteri.Fill(taulu);   
-
-            tuotelista.ItemsSource = taulu.DefaultView;
-
-            yhteys.Close();
-
+            Paivita_DataGrid(sender, e);
         }
     }
 }
