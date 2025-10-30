@@ -12,3 +12,5 @@ INSERT INTO tuotteet (nimi, hinta, varastosaldo) VALUES
 ('Tuote D', 49.99, 20);
 
 SELECT * FROM tuotteet;
+
+DELETE FROM tuotteet WHERE id = 1002;

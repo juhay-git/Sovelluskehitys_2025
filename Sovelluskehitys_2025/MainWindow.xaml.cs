@@ -19,6 +19,7 @@ namespace Sovelluskehitys_2025
     /// </summary>
     public partial class MainWindow : Window
     {
+        string polku = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\k5000833\\Documents\\sovelluskehitys.mdf;Integrated Security=True;Connect Timeout=30";
         public MainWindow()
         {
             InitializeComponent();
@@ -26,12 +27,18 @@ namespace Sovelluskehitys_2025
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            tekstikentta_1.Text = "klikattiin";
+            SqlConnection yhteys = new SqlConnection(polku);
+            yhteys.Open();
+
+            string kysely = "INSERT INTO tuotteet (nimi, hinta, varastosaldo) VALUES ('"+tekstikentta_1.Text+"', "+tekstikentta_2.Text+", "+tekstikentta_3.Text+");";
+            SqlCommand komento = new SqlCommand(kysely, yhteys);
+            komento.ExecuteNonQuery();
+
+            yhteys.Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string polku = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\k5000833\\Documents\\sovelluskehitys.mdf;Integrated Security=True;Connect Timeout=30";
             SqlConnection yhteys = new SqlConnection(polku);
             yhteys.Open();
 

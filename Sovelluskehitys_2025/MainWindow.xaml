@@ -7,12 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Painike 1" HorizontalAlignment="Left" Margin="34,64,0,0" VerticalAlignment="Top" Height="40" Width="108" Click="Button_Click"/>
-        <Button Content="Hae tiedot" HorizontalAlignment="Left" Margin="34,125,0,0" VerticalAlignment="Top" Height="40" Width="109" Click="Button_Click_1"/>
-        <TextBox x:Name="tekstikentta_1" HorizontalAlignment="Left" Margin="203,64,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="136" Height="40"/>
-        <TextBox x:Name="tekstikentta_2" HorizontalAlignment="Left" Margin="203,125,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="136" Height="40"/>
-        <ComboBox HorizontalAlignment="Left" Margin="645,73,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Lisää tuote" HorizontalAlignment="Left" Margin="592,145,0,0" VerticalAlignment="Top" Height="40" Width="136" Click="Button_Click"/>
+        <Button Content="Hae tiedot" HorizontalAlignment="Left" Margin="98,145,0,0" VerticalAlignment="Top" Height="40" Width="109" Click="Button_Click_1"/>
+        <TextBox x:Name="tekstikentta_1" HorizontalAlignment="Left" Margin="592,43,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="136" Height="20"/>
+        <TextBox x:Name="tekstikentta_2" HorizontalAlignment="Left" Margin="592,77,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="136" Height="20" RenderTransformOrigin="1.005,0.536"/>
+        <ComboBox HorizontalAlignment="Left" Margin="203,25,0,0" VerticalAlignment="Top" Width="120"/>
         <DataGrid x:Name="tuotelista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="98,203,72,52"/>
+        <TextBox x:Name="tekstikentta_3" HorizontalAlignment="Left" Margin="592,114,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="136" Height="20" RenderTransformOrigin="1.005,0.536"/>
+        <Label Content="Nimi" HorizontalAlignment="Left" Margin="472,40,0,0" VerticalAlignment="Top" Width="86"/>
+        <Label Content="Hinta" HorizontalAlignment="Left" Margin="472,74,0,0" VerticalAlignment="Top" Width="86"/>
+        <Label Content="Varastosaldo" HorizontalAlignment="Left" Margin="472,111,0,0" VerticalAlignment="Top" Width="86"/>
 
     </Grid>
 </Window>
