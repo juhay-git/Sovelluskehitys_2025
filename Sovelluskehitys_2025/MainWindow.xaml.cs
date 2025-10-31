@@ -53,12 +53,23 @@ namespace Sovelluskehitys_2025
             SqlCommand komento = new SqlCommand("SELECT * FROM tuotteet", yhteys);
             SqlDataReader lukija = komento.ExecuteReader();
 
-            cb_tuotelista.Items.Clear();
+            /* tehdään datataulu comboboxin sisältöa varten */
+            DataTable taulu = new DataTable();
+            taulu.Columns.Add("id", typeof(string));
+            taulu.Columns.Add("nimi", typeof(string));
+
+            /* tehdään sidos että comboboxissa näytetään datataulu */
+            cb_tuotelista.ItemsSource = taulu.DefaultView;
+            cb_tuotelista.DisplayMemberPath = "nimi";
+            cb_tuotelista.SelectedValuePath = "id";
 
             while (lukija.Read())
             {
+                int id = lukija.GetInt32(0);
+                string nimi = lukija.GetString(1);
+                taulu.Rows.Add(id, nimi);
                 //cb_tuotelista.Items.Add(lukija["nimi"].ToString());
-                cb_tuotelista.Items.Add(lukija.GetString(1));
+                //cb_tuotelista.Items.Add(lukija.GetString(1));
             }
             lukija.Close();
 
@@ -70,6 +81,11 @@ namespace Sovelluskehitys_2025
             SqlConnection yhteys = new SqlConnection(polku);
             yhteys.Open();
 
+            if (tekstikentta_1.Text == "" || tekstikentta_2.Text == "" || tekstikentta_3.Text == "")
+            {
+                MessageBox.Show("Täytä kaikki kentät ennen tallennusta.");
+                return;
+            }
             string kysely = "INSERT INTO tuotteet (nimi, hinta, varastosaldo) VALUES ('"+tekstikentta_1.Text+"', "+tekstikentta_2.Text+", "+tekstikentta_3.Text+");";
             SqlCommand komento = new SqlCommand(kysely, yhteys);
             komento.ExecuteNonQuery();
@@ -87,6 +103,29 @@ namespace Sovelluskehitys_2025
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             Paivita_DataGrid(sender, e);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            SqlConnection yhteys = new SqlConnection(polku);
+            yhteys.Open();
+
+            if (cb_tuotelista.SelectedValue == null)
+            {
+                MessageBox.Show("Valitse poistettava tuote ensin.");
+                return;
+            }
+            string id = cb_tuotelista.SelectedValue.ToString();
+            MessageBox.Show("Poistetaan tuote, id: " + id);
+
+            string kysely = "DELETE FROM tuotteet WHERE id = " + id + ";";
+            SqlCommand komento = new SqlCommand(kysely, yhteys);
+            komento.ExecuteNonQuery();
+
+            yhteys.Close();
+
+            Paivita_DataGrid(sender, e);
+            Paivita_ComboBox(sender, e);
         }
     }
 }
