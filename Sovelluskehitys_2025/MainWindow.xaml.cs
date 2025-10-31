@@ -24,6 +24,7 @@ namespace Sovelluskehitys_2025
         {
             InitializeComponent();
             Paivita_DataGrid(this, null);
+            Paivita_ComboBox(this, null);
         }
 
         private void Paivita_DataGrid(object sender, RoutedEventArgs e)
@@ -44,6 +45,26 @@ namespace Sovelluskehitys_2025
             yhteys.Close();
         }
 
+        private void Paivita_ComboBox(object sender, RoutedEventArgs e)
+        {
+            SqlConnection yhteys = new SqlConnection(polku);
+            yhteys.Open();
+
+            SqlCommand komento = new SqlCommand("SELECT * FROM tuotteet", yhteys);
+            SqlDataReader lukija = komento.ExecuteReader();
+
+            cb_tuotelista.Items.Clear();
+
+            while (lukija.Read())
+            {
+                //cb_tuotelista.Items.Add(lukija["nimi"].ToString());
+                cb_tuotelista.Items.Add(lukija.GetString(1));
+            }
+            lukija.Close();
+
+            yhteys.Close();
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SqlConnection yhteys = new SqlConnection(polku);
@@ -56,6 +77,7 @@ namespace Sovelluskehitys_2025
             yhteys.Close();
 
             Paivita_DataGrid(sender, e);
+            Paivita_ComboBox(sender, e);
 
             tekstikentta_1.Clear();
             tekstikentta_2.Clear();
