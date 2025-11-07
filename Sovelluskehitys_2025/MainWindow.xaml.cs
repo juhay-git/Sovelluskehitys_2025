@@ -23,24 +23,23 @@ namespace Sovelluskehitys_2025
         public MainWindow()
         {
             InitializeComponent();
-            Paivita_DataGrid(this, null);
+            Paivita_DataGrid("SELECT * FROM tuotteet", "tuotteet", tuotelista);
             Paivita_ComboBox(this, null);
         }
 
-        private void Paivita_DataGrid(object sender, RoutedEventArgs e)
+        private void Paivita_DataGrid(string kysely, string taulun_nimi, DataGrid grid)
         {
             SqlConnection yhteys = new SqlConnection(polku);
             yhteys.Open();
 
-            string kysely = "SELECT * FROM tuotteet";
             SqlCommand komento = yhteys.CreateCommand();
             komento.CommandText = kysely;
 
             SqlDataAdapter adapteri = new SqlDataAdapter(komento);
-            DataTable taulu = new DataTable("tuotteet");
+            DataTable taulu = new DataTable(taulun_nimi);
             adapteri.Fill(taulu);
 
-            tuotelista.ItemsSource = taulu.DefaultView;
+            grid.ItemsSource = taulu.DefaultView;
 
             yhteys.Close();
         }
@@ -92,7 +91,7 @@ namespace Sovelluskehitys_2025
 
             yhteys.Close();
 
-            Paivita_DataGrid(sender, e);
+            Paivita_DataGrid("SELECT * FROM tuotteet", "tuotteet", tuotelista);
             Paivita_ComboBox(sender, e);
 
             tekstikentta_1.Clear();
@@ -102,7 +101,7 @@ namespace Sovelluskehitys_2025
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Paivita_DataGrid(sender, e);
+            Paivita_DataGrid("SELECT * FROM tuotteet", "tuotteet", tuotelista);
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -124,7 +123,7 @@ namespace Sovelluskehitys_2025
 
             yhteys.Close();
 
-            Paivita_DataGrid(sender, e);
+            Paivita_DataGrid("SELECT * FROM tuotteet", "tuotteet", tuotelista);
             Paivita_ComboBox(sender, e);
         }
     }
