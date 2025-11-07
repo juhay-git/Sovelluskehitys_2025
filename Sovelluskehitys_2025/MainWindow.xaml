@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TabControl>
+        <TabControl SelectionChanged="TabControl_SelectionChanged">
             <TabItem Header="Tuotteet">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
@@ -32,6 +32,16 @@
                     <Label Content="Hinta" HorizontalAlignment="Left" Margin="100,74,0,0" VerticalAlignment="Top" Width="86"/>
                     <Label Content="Varastosaldo" HorizontalAlignment="Left" Margin="100,111,0,0" VerticalAlignment="Top" Width="86"/>
                     <Button Content="Poista tuote" HorizontalAlignment="Left" Margin="533,143,0,0" VerticalAlignment="Top" Height="42" Width="107" Click="Button_Click_2"/>
+                    <CheckBox x:Name="valinta_boksi" Content="Admin" HorizontalAlignment="Left" Margin="172,302,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="valinta_boksi_Unchecked"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="asiakkaat_tab" Header="Asiakkaat">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="asiakaslista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,203,70,52"/>
+                    <Button Content="Lisää asiakas" HorizontalAlignment="Left" Margin="317,139,0,0" VerticalAlignment="Top" Width="109" Height="33" Click="Button_Click_3"/>
+                    <TextBox x:Name="asiakas_nimi" HorizontalAlignment="Left" Margin="210,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162"/>
+                    <TextBox x:Name="asiakas_osoite" HorizontalAlignment="Left" Margin="210,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162"/>
+                    <TextBox x:Name="asiakas_puhelin" HorizontalAlignment="Left" Margin="210,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162"/>
                 </Grid>
             </TabItem>
         </TabControl>
