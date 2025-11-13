@@ -7,7 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded" Closing="Window_Closing">
     <Grid>
-        <TabControl SelectionChanged="TabControl_SelectionChanged">
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Tiedosto">
+                <MenuItem Header="Avaa"/>
+                <MenuItem Header="Sulje" Click="MenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="Ohje">
+                <MenuItem Header="Tietoja ohjelmasta"/>
+            </MenuItem>
+        </Menu>
+        <TabControl SelectionChanged="TabControl_SelectionChanged" Margin="0,26,0,24">
             <TabItem Header="Tuotteet">
                 <Grid Background="#FFE5E5E5">
                     <Grid.ColumnDefinitions>
@@ -45,6 +54,12 @@
                 </Grid>
             </TabItem>
         </TabControl>
+        <StatusBar VerticalAlignment="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="tilaviesti" Text="Valmis"/>
+            </StatusBarItem>
+        </StatusBar>
+
 
     </Grid>
 </Window>

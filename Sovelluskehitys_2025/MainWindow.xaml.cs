@@ -149,18 +149,30 @@ namespace Sovelluskehitys_2025
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            yhteys = new SqlConnection(polku);
-            yhteys.Open();
+            try
+            {
+                yhteys = new SqlConnection(polku);
+                yhteys.Open();
 
-            Paivita_DataGrid("SELECT * FROM tuotteet", "tuotteet", tuotelista);
-            Paivita_DataGrid("SELECT * FROM asiakkaat", "asiakkaat", asiakaslista);
-            Paivita_ComboBox(this, null);
-            //asiakkaat_tab.IsEnabled = false;
+                Paivita_DataGrid("SELECT * FROM tuotteet", "tuotteet", tuotelista);
+                Paivita_DataGrid("SELECT * FROM asiakkaat", "asiakkaat", asiakaslista);
+                Paivita_ComboBox(this, null);
+                //asiakkaat_tab.IsEnabled = false;
+            }
+            catch (Exception ex)
+            {
+                tilaviesti.Text = "Tietokantayhteyden avaus epäonnistui. " + ex.Message;
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             yhteys.Close();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
         }
     }
 }
