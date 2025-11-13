@@ -20,18 +20,15 @@ namespace Sovelluskehitys_2025
     public partial class MainWindow : Window
     {
         string polku = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\k5000833\\Documents\\sovelluskehitys.mdf;Integrated Security=True;Connect Timeout=30";
+        SqlConnection yhteys;
+
         public MainWindow()
         {
             InitializeComponent();
-            Paivita_DataGrid("SELECT * FROM tuotteet", "tuotteet", tuotelista);
-            Paivita_ComboBox(this, null);
         }
 
         private void Paivita_DataGrid(string kysely, string taulun_nimi, DataGrid grid)
         {
-            SqlConnection yhteys = new SqlConnection(polku);
-            yhteys.Open();
-
             SqlCommand komento = yhteys.CreateCommand();
             komento.CommandText = kysely;
 
@@ -40,15 +37,10 @@ namespace Sovelluskehitys_2025
             adapteri.Fill(taulu);
 
             grid.ItemsSource = taulu.DefaultView;
-
-            yhteys.Close();
         }
 
         private void Paivita_ComboBox(object sender, RoutedEventArgs e)
         {
-            SqlConnection yhteys = new SqlConnection(polku);
-            yhteys.Open();
-
             SqlCommand komento = new SqlCommand("SELECT * FROM tuotteet", yhteys);
             SqlDataReader lukija = komento.ExecuteReader();
 
@@ -71,15 +63,10 @@ namespace Sovelluskehitys_2025
                 //cb_tuotelista.Items.Add(lukija.GetString(1));
             }
             lukija.Close();
-
-            yhteys.Close();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SqlConnection yhteys = new SqlConnection(polku);
-            yhteys.Open();
-
             if (tekstikentta_1.Text == "" || tekstikentta_2.Text == "" || tekstikentta_3.Text == "")
             {
                 MessageBox.Show("Täytä kaikki kentät ennen tallennusta.");
@@ -89,7 +76,6 @@ namespace Sovelluskehitys_2025
             SqlCommand komento = new SqlCommand(kysely, yhteys);
             komento.ExecuteNonQuery();
 
-            yhteys.Close();
 
             Paivita_DataGrid("SELECT * FROM tuotteet", "tuotteet", tuotelista);
             Paivita_ComboBox(sender, e);
@@ -106,9 +92,6 @@ namespace Sovelluskehitys_2025
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            SqlConnection yhteys = new SqlConnection(polku);
-            yhteys.Open();
-
             if (cb_tuotelista.SelectedValue == null)
             {
                 MessageBox.Show("Valitse poistettava tuote ensin.");
@@ -121,10 +104,63 @@ namespace Sovelluskehitys_2025
             SqlCommand komento = new SqlCommand(kysely, yhteys);
             komento.ExecuteNonQuery();
 
-            yhteys.Close();
 
             Paivita_DataGrid("SELECT * FROM tuotteet", "tuotteet", tuotelista);
             Paivita_ComboBox(sender, e);
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Check päällä");
+            asiakkaat_tab.IsEnabled = true;
+        }
+
+        private void valinta_boksi_Unchecked(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Check pois");
+            asiakkaat_tab.IsEnabled = false;
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            if (asiakas_nimi.Text == "" || asiakas_osoite.Text == "" || asiakas_puhelin.Text == "")
+            {
+                MessageBox.Show("Täytä kaikki kentät ennen tallennusta.");
+                return;
+            }
+            string kysely = "INSERT INTO asiakkaat (nimi, osoite, puhelin) VALUES ('" + asiakas_nimi.Text + "', '" + asiakas_osoite.Text + "','" + asiakas_puhelin.Text + "');";
+            // INSERT INTO asiakkaat (nimi, osoite, puhelin) VALUES ('Masa','Masaosoite 1', '0401234567');
+            SqlCommand komento = new SqlCommand(kysely, yhteys);
+            komento.ExecuteNonQuery();
+
+
+            Paivita_DataGrid("SELECT * FROM asiakkaat", "asiakkaat", asiakaslista);
+
+
+            asiakas_nimi.Clear();
+            asiakas_osoite.Clear();
+            asiakas_puhelin.Clear();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            yhteys = new SqlConnection(polku);
+            yhteys.Open();
+
+            Paivita_DataGrid("SELECT * FROM tuotteet", "tuotteet", tuotelista);
+            Paivita_DataGrid("SELECT * FROM asiakkaat", "asiakkaat", asiakaslista);
+            Paivita_ComboBox(this, null);
+            //asiakkaat_tab.IsEnabled = false;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            yhteys.Close();
         }
     }
 }

@@ -5,6 +5,14 @@ CREATE TABLE tuotteet (
 	varastosaldo INT NOT NULL
 );
 
+
+CREATE TABLE asiakkaat (
+	id INTEGER IDENTITY(1,1) PRIMARY KEY,
+	nimi VARCHAR(100) NOT NULL,
+	osoite VARCHAR(100) NOT NULL,
+	puhelin VARCHAR(100) NOT NULL
+);
+
 INSERT INTO tuotteet (nimi, hinta, varastosaldo) VALUES
 ('Tuote A', 19.99, 50),
 ('Tuote B', 29.99, 30),
