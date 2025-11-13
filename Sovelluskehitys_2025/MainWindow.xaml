@@ -53,6 +53,15 @@
                     <TextBox x:Name="asiakas_puhelin" HorizontalAlignment="Left" Margin="210,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162"/>
                 </Grid>
             </TabItem>
+            <TabItem x:Name="tilaukset_tab" Header="Tilaukset" GotFocus="tilaukset_tab_GotFocus" Height="20" VerticalAlignment="Top">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,112,0,36"/>
+                    <ComboBox x:Name="cb_tuote_tilaus" HorizontalAlignment="Left" Margin="106,43,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="cb_asiakas_tilaus" HorizontalAlignment="Left" Margin="277,43,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.05,0.095"/>
+                    <Button Content="Lisää tilaus" HorizontalAlignment="Left" Margin="464,44,0,0" VerticalAlignment="Top" Height="33" Width="116" Click="Button_Click_4"/>
+                </Grid>
+            </TabItem>
+
         </TabControl>
         <StatusBar VerticalAlignment="Bottom">
             <StatusBarItem>
