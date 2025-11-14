@@ -55,7 +55,21 @@
             </TabItem>
             <TabItem x:Name="tilaukset_tab" Header="Tilaukset" GotFocus="tilaukset_tab_GotFocus" Height="20" VerticalAlignment="Top">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,112,0,36"/>
+                    <DataGrid x:Name="tilauslista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,112,0,36" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Tilaus ID" Binding="{Binding id}" Width="*"/>
+                            <DataGridTextColumn Header="Asiakas" Binding="{Binding asiakas}" Width="*"/>
+                            <DataGridTextColumn Header="Osoite" Binding="{Binding osoite}" Width="*"/>
+                            <DataGridTextColumn Header="Tuote" Binding="{Binding tuote}" Width="*"/>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Name="toimita_tilaus" Content="Toimita" Click="Toimita_Tilaus_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn> 
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <ComboBox x:Name="cb_tuote_tilaus" HorizontalAlignment="Left" Margin="106,43,0,0" VerticalAlignment="Top" Width="120"/>
                     <ComboBox x:Name="cb_asiakas_tilaus" HorizontalAlignment="Left" Margin="277,43,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="-0.05,0.095"/>
                     <Button Content="Lisää tilaus" HorizontalAlignment="Left" Margin="464,44,0,0" VerticalAlignment="Top" Height="33" Width="116" Click="Button_Click_4"/>
