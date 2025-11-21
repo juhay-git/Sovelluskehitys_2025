@@ -10,6 +10,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
 using Microsoft.Data.SqlClient;
+using MahApps.Metro.Controls;
+using ControlzEx.Theming;
 
 
 namespace Sovelluskehitys_2025
@@ -17,7 +19,7 @@ namespace Sovelluskehitys_2025
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         string polku = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\k5000833\\Documents\\sovelluskehitys.mdf;Integrated Security=True;Connect Timeout=30";
         SqlConnection yhteys;
@@ -25,6 +27,8 @@ namespace Sovelluskehitys_2025
         public MainWindow()
         {
             InitializeComponent();
+
+            ThemeManager.Current.ChangeTheme(this, "Light.Blue");
         }
 
         private void Paivita_DataGrid(string kysely, string taulun_nimi, DataGrid grid)
