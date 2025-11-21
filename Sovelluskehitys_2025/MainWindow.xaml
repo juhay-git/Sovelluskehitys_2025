@@ -75,7 +75,11 @@
                     <Button Content="Lisää tilaus" HorizontalAlignment="Left" Margin="464,44,0,0" VerticalAlignment="Top" Height="33" Width="116" Click="Button_Click_4"/>
                 </Grid>
             </TabItem>
-
+            <TabItem Header="Toimitetut">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="toimitetut_lista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="70,93,70,52"/>
+                </Grid>
+            </TabItem>
         </TabControl>
         <StatusBar VerticalAlignment="Bottom">
             <StatusBarItem>

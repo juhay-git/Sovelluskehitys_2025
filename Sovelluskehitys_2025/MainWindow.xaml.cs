@@ -158,6 +158,7 @@ namespace Sovelluskehitys_2025
                 Paivita_DataGrid("SELECT * FROM tuotteet", "tuotteet", tuotelista);
                 Paivita_DataGrid("SELECT * FROM asiakkaat", "asiakkaat", asiakaslista);
                 Paivita_DataGrid("SELECT ti.id as id, a.nimi as asiakas, a.osoite as osoite, tu.nimi as tuote, ti.toimitettu as toimitettu FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu=0;", "tilaukset", tilauslista);
+                Paivita_DataGrid("SELECT ti.id as id, a.nimi as asiakas, a.osoite as osoite, tu.nimi as tuote, ti.toimitettu as toimitettu FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu=1;", "toimitetut", toimitetut_lista);
                 Paivita_ComboBox("SELECT * FROM tuotteet", cb_tuotelista);
 
                 Paivita_ComboBox("SELECT * FROM tuotteet", cb_tuote_tilaus);
@@ -218,6 +219,7 @@ namespace Sovelluskehitys_2025
             komento.ExecuteNonQuery();
 
             Paivita_DataGrid("SELECT ti.id as id, a.nimi as asiakas, a.osoite as osoite, tu.nimi as tuote, ti.toimitettu as toimitettu FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu=0;", "tilaukset", tilauslista);
+            Paivita_DataGrid("SELECT ti.id as id, a.nimi as asiakas, a.osoite as osoite, tu.nimi as tuote, ti.toimitettu as toimitettu FROM tilaukset ti, asiakkaat a, tuotteet tu WHERE a.id=ti.asiakas_id AND tu.id=ti.tuote_id AND ti.toimitettu=1;", "toimitetut", toimitetut_lista);
         }
     }
 }
