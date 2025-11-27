@@ -12,6 +12,7 @@ using System.Data;
 using Microsoft.Data.SqlClient;
 using MahApps.Metro.Controls;
 using ControlzEx.Theming;
+using MahApps.Metro.Controls.Dialogs;
 
 
 namespace Sovelluskehitys_2025
@@ -150,6 +151,21 @@ namespace Sovelluskehitys_2025
             asiakas_nimi.Clear();
             asiakas_osoite.Clear();
             asiakas_puhelin.Clear();
+        }
+
+        private void Avaa_Menu_Click(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show("Avaa tiedosto -toiminto ei ole vielä käytössä.");
+            //this.ShowModalMessageExternal("Ei vielä käytössä", "Avaa tiedosto -toiminto ei ole vielä käytössä.");
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.DefaultExt = ".cpp";
+            dialog.Filter = "C++ Files (*.cpp)|*.cpp|All Files (*.*)|*.*";
+            bool? result = dialog.ShowDialog();
+            if (result == true)
+            {
+                string filename = dialog.FileName;
+                this.ShowModalMessageExternal("Valittu tiedosto", filename);
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

@@ -10,7 +10,7 @@
     <Grid>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Tiedosto">
-                <MenuItem Header="Avaa"/>
+                <MenuItem Header="Avaa" Click="Avaa_Menu_Click"/>
                 <MenuItem Header="Sulje" Click="MenuItem_Click"/>
             </MenuItem>
             <MenuItem Header="Ohje">
@@ -54,7 +54,7 @@
                     <TextBox x:Name="asiakas_puhelin" HorizontalAlignment="Left" Margin="210,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="162"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tilaukset_tab" Header="Tilaukset" GotFocus="tilaukset_tab_GotFocus" Height="20" VerticalAlignment="Top">
+            <TabItem x:Name="tilaukset_tab" Header="Tilaukset" VerticalAlignment="Center">
                 <Grid>
                     <DataGrid x:Name="tilauslista" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,112,0,36" AutoGenerateColumns="False">
                         <DataGrid.Columns>
@@ -68,7 +68,7 @@
                                         <Button Name="toimita_tilaus" Content="Toimita" Click="Toimita_Tilaus_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn> 
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                     <ComboBox x:Name="cb_tuote_tilaus" HorizontalAlignment="Left" Margin="106,43,0,0" VerticalAlignment="Top" Width="120"/>
